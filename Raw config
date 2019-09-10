@@ -1,0 +1,2125 @@
+resources:
+  - type: js
+    url: /local/dual-thermostat/dual-thermostat.js?v=1
+  - type: js
+    url: /community_plugin/unused-card/unused-card.js
+  - type: js
+    url: /community_plugin/air-visual-card/air-visual-card.js
+  - type: js
+    url: /local/custom_ui/state-card-aftership.js
+  - type: js
+    url: /local/gauge-card.js
+  - type: module
+    url: /local/circle-sensor-card.js?v=0
+  - type: module
+    url: /local/mini-media-player-bundle.js
+  - type: js
+    url: /local/alarm_control_panel-card.js
+  - type: module
+    url: /local/mini-graph-card-bundle.js?v=0.5.0
+  - type: module
+    url: /local/button-card.js
+  - type: js
+    url: /local/plugins/card-mod.js?v=1
+  - type: js
+    url: /local/card-mod.js?v=1
+  - type: js
+    url: /local/card-tools.js?track=true
+  - type: js
+    url: /local/light-entity-card.js
+  - type: js
+    url: /local/card-loader.js
+  - type: module
+    url: /community_plugin/aftership-card/aftership-card.js
+  - type: js
+    url: /local/vertical-stack-in-card.js?v=0.1.3
+  - type: module
+    url: /local/community_plugin/decluttering-card/decluttering-card.js
+  - type: js
+    url: /local/community_plugin/lovelace-grocy-chores-card/grocy-chores-card.js
+  - type: js
+    url: /local/community_plugin/lovelace-text-input-row/text-input-row.js
+  - type: js
+    url: /local/community_plugin/lovelace-home-feed-card/home-feed-card.js
+  - type: js
+    url: /local/community_plugin/group-element/group-element.js
+  - type: module
+    url: /local/radial-menu.js
+  - type: module
+    url: /local/group-element-bundle.js?v=0.4.0
+  - type: js
+    url: /community_plugin/text-element/text-element.js
+  - type: js
+    url: /local/customcards/github/thomasloven/card-tools.js?track=true
+  - type: module
+    url: /local/customcards/github/thomasloven/markdown-mod.js
+  - type: js
+    url: /local/customcards/github/thomasloven/layout-card.js?track=true
+  - type: js
+    url: /local/customcards/github/thomasloven/slider-entity-row.js
+  - type: js
+    url: /local/customcards/github/thomasloven/more-info-card.js
+  - type: js
+    url: /local/toggle-lock-entity-row.js
+  - type: js
+    url: /local/customcards/github/thomasloven/dummy-entity-row.js?track=true
+  - type: js
+    url: /local/customcards/github/thomasloven/popup-card.js?track=true
+  - type: js
+    url: /customcards/github/thomasloven/color-picker.js
+  - type: js
+    url: /local/customcards/github/thomasloven/long-press.js
+  - type: module
+    url: /local/custom-lovelace/thermostat-card/thermostat-card.js?v=1
+  - type: module
+    url: /local/surveillance-card.js
+  - type: module
+    url: /locl/community_plugin/lovelace-light-with-profiles/light-with-profiles.js
+  - type: module
+    url: /local/community_plugin/text-action-element/text-action-element.js
+  - type: module
+    url: /local/community_plugin/roku-card/roku-card.js
+  - type: js
+    url: /local/community_plugin/monster-card/monster-card.js
+  - type: js
+    url: /local/community_plugin/travel-time-card/travel-time-card.js
+  - type: js
+    url: /local/custom_ui/weather-card.js
+  - type: js
+    url: /local/grocy-chores-card.js
+  - type: module
+    url: /local/atomic_calendar.js
+  - type: module
+    url: /community_plugin/spotify-card/spotify-card.js
+  - type: js
+    url: /local/state-element.js?v=0
+  - type: js
+    url: /local/community_plugin/tracking-number-card/tracking-number-card.js
+title: Cato Home
+views:
+  - badges: []
+    cards:
+      - cards:
+          - entities:
+              - entity: alarm_control_panel.ha_alarm
+                name: Alarm History
+            hours_to_show: 6
+            refresh_interval: 15
+            style: |
+              ha-card {
+              border-radius: 55px;
+              height: 65px
+              box-shadow: 2px 5px 5px grey;
+              }
+            type: history-graph
+          - entity: alarm_control_panel.ha_alarm
+            states:
+              - arm_home
+              - arm_away
+              - arm_night
+            style:
+              '#keypad mwc-button':
+                $: |
+                  :host {
+                  background: white;
+                  border-radius: 45px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                   button {
+                   font-size: 18.5px !important;
+                   }
+                .: |
+                  ha-card {border-radius: 55px;
+                  background-size: 500px 500px;
+                  background-opacity: 0.5;
+                  background-position-y: 40px;
+                    --mdc-theme-primary: blue;
+                  ###box-shadow: '3px 3px rgba(0,0,0,0.4)';
+                  box-shadow: 2px 5px 5px grey;
+
+                  }
+            type: alarm-panel
+        type: vertical-stack
+      - cards:
+          - entities:
+              - entity: binary_sensor.back_door_2
+                name: Back Door
+              - entity: binary_sensor.back_door_tamper_sensor
+                name: B.D Tamper
+              - entity: binary_sensor.front_door_2
+                name: Front Door
+              - entity: binary_sensor.front_door_tamper_sensor_2
+                name: F.D Tamper
+              - entity: binary_sensor.bedroom_motion
+                name: Bed Motion
+              - entity: binary_sensor.livingroom_motion_3
+                name: Living Motion
+            hours_to_show: 6
+            refresh_interval: 15
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+              }
+            title: History
+            type: history-graph
+          - cards:
+              - entities:
+                  - binary_sensor.back_door_2
+                  - entity: binary_sensor.back_door_tamper_sensor
+                    name: Tamper
+                  - binary_sensor.front_door_2
+                  - entity: binary_sensor.front_door_tamper_sensor_2
+                    name: Tamper
+                show_header_toggle: false
+                style: |
+                  ha-card {
+                  border-radius: 55px;
+                  box-shadow: 2px 5px 5px grey;
+                  }
+                title: Doors & Windows
+                type: entities
+              - entities:
+                  - entity: binary_sensor.livingroom_motion_3
+                    name: Livingroom
+                  - entity: binary_sensor.bedroom_motion
+                    name: Bedroom
+                show_header_toggle: false
+                style: |
+                  ha-card {
+                  border-radius: 55px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                title: Motion
+                type: entities
+            type: horizontal-stack
+        type: vertical-stack
+    icon: 'mdi:alarm-bell'
+    path: ''
+    theme: default
+    title: Alarm
+  - badges: []
+    cards:
+      - aspect_ratio: 100%
+        title: 3D Printer
+        type: iframe
+        url: 'http://192.168.1.7/webcam/?action=stream'
+    icon: 'mdi:cctv'
+    panel: true
+    path: cameras
+    theme: Backend-selected
+    title: Surveillance
+  - badges:
+      - sun.sun
+      - sensor.moon_phases
+      - sensor.hacs
+      - binary_sensor.updater
+      - alarm_control_panel.ha_alarm
+    cards:
+      - card:
+          show_state: false
+          style: |
+            ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+             }
+          title: Active Devices
+          type: glance
+        entities:
+          - entity: light.king_deveraux
+            name: Cody
+          - entity: light.livingroom
+          - entity: light.livingroom_2
+          - entity: light.princess_gabrielle
+            name: Gabrielle
+          - entity: light.prince_nathaniel
+            name: Nathaniel
+          - entity: switch.barlight
+            name: Fish Pump
+          - entity: switch.fishlight
+            name: Fish Light
+        state_filter:
+          - 'on'
+        type: entity-filter
+      - card:
+          entities:
+            - switch.barlight
+          name: Fish Pump
+          style: |
+            @keyframes blink {
+            0% {
+              background: [[ if(switch.barlight == 'off', "red") ]]; 
+            }
+            }
+            ha-card {
+              animation: blink 1s linear infinite;
+              border-radius: 55px;
+              box-shadow: 0px 20px 20px grey;
+            }
+          type: entities
+        conditions:
+          - entity: switch.barlight
+            name: Fish Pump
+            state: 'off'
+        type: conditional
+      - entities:
+          - entity: input_select.hass_template
+        show_header_toggle: false
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        theme: default
+        title: Theme Overwrite
+        type: entities
+      - entities:
+          - entity: input_boolean.maintainance_mode
+          - entity: input_boolean.dark
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: entities
+      - elements:
+          - conditions:
+              - entity: sensor.deveraux_charging
+                state: 'true'
+            elements:
+              - attribute: battery_charging
+                color_stops:
+                  '0': 'rgba(0,0,0,0.0)'
+                  '100': 'rgba(0,0,0,0.0)'
+                entity: device_tracker.life360_deveraux
+                fill: 'rgba(0,0,0,0.0)'
+                font_style:
+                  color: 'rgba(0,255,0,0.9)'
+                gradient: true
+                show_max: true
+                stroke_width: 0
+                style:
+                  animation: shadow-pulse 2s infinite
+                  border-radius: 100px
+                  height: 100px
+                  left: 20%
+                  top: 25%
+                  width: 100px
+                type: 'custom:circle-sensor-card'
+            type: conditional
+          - entity: device_tracker.life360_deveraux
+            state_image:
+              away: /local/codyBW2.png
+              home: /local/cody2.png
+            style:
+              height: 97px
+              left: 20%
+              top: 25%
+              width: 97px
+            type: image
+          - attribute: battery
+            color_stops:
+              '0': '#ff0000'
+              '50': '#ffe600'
+              '100': '#009919'
+            entity: device_tracker.life360_deveraux
+            fill: 'rgba(0,0,0,0.0)'
+            font_style:
+              color: 'rgba(200,56,123,0.9)'
+            gradient: true
+            max: 100
+            min: 0
+            show_max: false
+            stroke_width: 13
+            style:
+              height: 115px
+              left: 20%
+              top: 25%
+              width: 115px
+            type: 'custom:circle-sensor-card'
+            units: '%'
+          - entity: device_tracker.hostname1
+            state_image:
+              home: /local/sash.png
+              not_home: /local/sashBW.png
+            style:
+              height: 97px
+              left: 80%
+              top: 25%
+              width: 97px
+            type: image
+        image: /local/BG.jpeg
+        style: |
+          ha-card {
+          background-color: rgba(0,0,0,0.0);
+          height: 145px;
+          box-shadow: 2px 5px 5px grey;
+          border-radius: 45px;
+          }
+          @keyframes shadow-pulse
+          {
+            0% {box-shadow: 0 0 0 0px rgba(0, 255, 0, 0.5);}
+            100% {box-shadow: 0 0 0 45px rgba(0, 255, 0, 0.0);}
+          }
+        type: picture-elements
+      - entities:
+          - entity: input_text.announce_google
+          - entity: input_text.announce_alexa
+          - entity: input_select.alexa_source
+        show_header_toggle: false
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        theme: default
+        type: entities
+    icon: 'mdi:solar-panel-large'
+    panel: false
+    path: default_view
+    theme: default
+    title: Overview
+  - badges: []
+    cards:
+      - entities:
+          - entity: input_select.who_cooks
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: entities
+      - entities:
+          - dateColor: black
+            dateSize: 90
+            dayWrapperLineColor: black
+            dimFinishedEvents: true
+            entity: calendar.codycato1882_gmail_com
+            eventBarColor: blue
+            finishedEventFilter: grayscale(100%)
+            finishedEventOpacity: 0.6
+            fullDayEventText: All day
+            locationIconColor: 'rgb(230, 124, 115)'
+            locationLinkColor: black
+            locationTextSize: 90
+            maxDaysToShow: 7
+            progressBarColor: blue
+            showColors: true
+            showCurrentEventLine: false
+            showLocation: true
+            showMonth: false
+            showProgressBar: true
+            timeColor: blue
+            timeSize: 90
+            titleColor: black
+            titleSize: 100
+            untilText: Until
+        style: |
+          ha-card {
+          border-radius: 55px;
+          box-shadow: 2px 5px 5px grey;
+          }
+        title: Calendar
+        type: 'custom:atomic-calendar'
+      - entities:
+          - entity: timer.laundry
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: entities
+      - entities:
+          - entity: calendar.holidays_in_united_states
+        show_header_toggle: false
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        title: Upcoming Holidays
+        type: 'custom:atomic-calendar'
+      - elements:
+          - action: toggle
+            entity: sensor.a_alarm
+            style:
+              color: white
+              font-size: 50px
+              left: 50%
+              top: 50%
+            tap_action: null
+            type: 'custom:state-element'
+          - image: /local/chevron-up1.png
+            style:
+              left: 34%
+              top: 30%
+              width: 40px
+            tap_action:
+              action: call-service
+              entity: input_select.a_alarm_hours
+              service: input_select.select_next
+              service_data:
+                entity_id: ' input_select.a_alarm_hours '
+            title: Plus Hour
+            type: image
+          - image: /local/chevron-down1.png
+            style:
+              left: 34%
+              top: 70%
+              width: 40px
+            tap_action:
+              action: call-service
+              entity: input_select.a_alarm_hours
+              service: input_select.select_previous
+              service_data:
+                entity_id: ' input_select.a_alarm_hours '
+            title: Plus Hour
+            type: image
+          - image: /local/chevron-up1.png
+            style:
+              left: 48%
+              top: 30%
+              width: 40px
+            tap_action:
+              action: call-service
+              entity: input_select.a_alarm_minutes
+              service: input_select.select_next
+              service_data:
+                entity_id: ' input_select.a_alarm_minutes '
+            title: Plus Hour
+            type: image
+          - image: /local/chevron-down1.png
+            style:
+              left: 48%
+              top: 70%
+              width: 40px
+            tap_action:
+              action: call-service
+              entity: input_select.a_alarm_minutes
+              service: input_select.select_previous
+              service_data:
+                entity_id: ' input_select.a_alarm_minutes '
+            title: Plus Hour
+            type: image
+          - image: /local/chevron-up1.png
+            style:
+              left: 64%
+              top: 30%
+              width: 40px
+            tap_action:
+              action: call-service
+              entity: input_select.alarm_ampm
+              service: input_select.select_next
+              service_data:
+                entity_id: ' input_select.alarm_ampm '
+            title: Plus Hour
+            type: image
+          - image: /local/chevron-down1.png
+            style:
+              left: 64%
+              top: 70%
+              width: 40px
+            tap_action:
+              action: call-service
+              entity: input_select.alarm_ampm
+              service: input_select.select_previous
+              service_data:
+                entity_id: ' input_select.alarm_ampm '
+            title: Plus Hour
+            type: image
+          - conditions:
+              - entity: input_boolean.a_alarm_status
+                state: 'on'
+            elements:
+              - entity: input_boolean.a_alarm_status
+                state_image:
+                  'off': /local/alarm2.png
+                  'on': /local/alarm1.png
+                style:
+                  animation: shadow-pulse 1s infinite
+                  border-radius: 100px
+                  color: white
+                  left: 80%
+                  top: 30%
+                  width: 40px
+                tap_action:
+                  action: toggle
+                type: image
+            type: conditional
+          - entity: input_boolean.a_alarm_status
+            state_image:
+              'off': /local/alarm2.png
+              'on': /local/alarm1.png
+            style:
+              border-radius: 100px
+              color: white
+              left: 80%
+              top: 30%
+              width: 40px
+            tap_action:
+              action: toggle
+            type: image
+          - entity: sensor.a_alarm
+            prefix: 'Next Alarm:  '
+            style:
+              color: white
+              font-size: 30px
+              left: 50%
+              top: 80%
+            type: state-label
+        image: /local/BG.jpeg
+        popup_cards:
+          sensor.a_alarm:
+            card: null
+            large: true
+            style:
+              background-color: 'rgba(0,0,0,0.3)'
+              background-image: /local/BG.jpeg
+            title: Bedside lamp settings
+        style: |
+          ha-card { 
+          background-color: rgba(0,0,0,0.9);
+          border-radius: 45px;
+          box-shadow: 2px 5px 5px grey;
+          }
+        type: picture-elements
+      - entity: sensor.aftership
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        title: Packages
+        type: 'custom:aftership-card'
+    icon: 'mdi:calendar-month'
+    panel: false
+    theme: default
+  - badges: []
+    cards:
+      - cards:
+          - entity: weather.dark_sky
+            name: Fort Huachuca
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+               }
+            type: weather-forecast
+          - cards:
+              - entity: camera.emx
+                style: |
+                  ha-card {
+                  border-radius: 55px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                type: picture-entity
+            type: horizontal-stack
+        type: vertical-stack
+      - cards:
+          - entities: []
+            title: Air Quality
+            type: glance
+          - air_pollution_level: sensor.u_s_air_pollution_level
+            air_quality_index: sensor.u_s_air_quality_index
+            city: Fort Huachuca
+            main_pollutant: sensor.u_s_main_pollutant
+            temp: weather.dark_sky
+            type: 'custom:air-visual-card'
+        type: vertical-stack
+      - entities:
+          - entity: sensor.pollen_outlook
+            icon: 'mdi:flower'
+            name: Outlook
+          - entity: sensor.pollen_level
+            icon: 'mdi:flower'
+            name: Current Pollen Level
+          - entity: sensor.top_allergen_1
+            icon: 'mdi:flower'
+            name: Top Allergen
+          - entity: sensor.pollen_percentage
+            icon: 'mdi:flower'
+            name: Current Percntage
+          - entity: sensor.pollen_index_forecast
+            icon: 'mdi:flower'
+            name: Tomorrow Percentage
+          - entity: sensor.pollen_level_forecast
+            icon: 'mdi:flower'
+            name: Tomorrow Level
+          - entity: sensor.cold_flu_risk
+            icon: 'mdi:snowflake'
+          - entity: sensor.cold_flu_percentage
+            icon: 'mdi:snowflake'
+            name: Cold & Flu Percentage
+        show_header_toggle: false
+        style: |
+          ha-card {
+          border-radius: 55px;
+          background-color: #A8E15E;
+          box-shadow: 2px 5px 5px grey;
+           }
+        theme: default
+        title: Pollen and Flu Forecast
+        type: entities
+      - aspect_ratio: 90%
+        style: |
+          ha-card {
+          border-radius: 55px;
+          box-shadow: 2px 5px 5px grey;
+           }
+        type: iframe
+        url: >-
+          https://embed.windy.com/embed2.html?lat=31.596&lon=-110.405&zoom=9&level=surface&overlay=temp&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=31.756&detailLon=-110.064&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1
+    icon: 'mdi:weather-cloudy'
+    theme: default
+    title: Weather
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - entities:
+                  - light.king_deveraux
+                  - entity: light.king_deveraux
+                    name: Cody
+                  - entity: light.livingroom
+                  - entity: light.princess_gabrielle
+                    name: Gabrielle
+                  - entity: light.prince_nathaniel
+                    name: Nathaniel
+                  - entity: switch.barlight
+                    name: Bar Light
+                  - entity: switch.fishlight
+                    name: Fish Light
+                style: |
+                  ha-card {
+                  border-radius: 55px;
+                  box-shadow: 2px 5px 5px grey;
+                  }
+                type: history-graph
+            title: Light History
+            type: vertical-stack
+        type: vertical-stack
+      - cards:
+          - entity: switch.barlight
+            hold_action:
+              action: none
+            name: Fish Pump
+            show_icon: true
+            show_name: true
+            style: |
+              @keyframes blink {
+                 0% {
+                background: [[ if(switch.barlight == 'off', "red") ]];
+              }
+              }
+               ha-card {
+               border-radius: 55px;
+               box-shadow: 2px 5px 5px grey;
+               background: [[ if(switch.barlight == "on", "green","") 
+              ]];
+              background: [[ if(switch.barlight == 'off', "red") ]];
+                }
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.fishlight
+            show_icon: true
+            show_name: true
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+              background: [[ if(switch.fishlight == "on", "green","") ]];
+               }
+            tap_action:
+              action: toggle
+            type: entity-button
+        type: horizontal-stack
+      - cards:
+          - cards:
+              - brightness: true
+                color_picker: true
+                color_temp: true
+                color_wheel: true
+                effects_list: true
+                entity: light.king_deveraux
+                group: true
+                header: ''
+                persist_features: true
+                style: |
+                  ha-card {
+                  border-radius: 40px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                type: 'custom:light-entity-card'
+                white_value: true
+              - brightness: true
+                color_picker: true
+                color_temp: true
+                color_wheel: true
+                effects_list: true
+                entity: light.livingroom
+                group: true
+                header: ''
+                persist_features: true
+                style: |
+                  ha-card {
+                  border-radius: 40px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                type: 'custom:light-entity-card'
+                white_value: true
+            type: horizontal-stack
+          - cards:
+              - brightness: true
+                color_picker: true
+                color_temp: true
+                color_wheel: true
+                effects_list: true
+                entity: light.livingroom_2
+                group: true
+                header: Livingroom2
+                persist_features: true
+                style: |
+                  ha-card {
+                  border-radius: 40px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                type: 'custom:light-entity-card'
+                white_value: true
+              - brightness: true
+                color_picker: true
+                color_temp: true
+                color_wheel: true
+                effects_list: true
+                entity: light.wled_light
+                group: true
+                header: Wled
+                persist_features: true
+                style: |
+                  ha-card {
+                  border-radius: 40px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                type: 'custom:light-entity-card'
+                white_value: true
+            type: horizontal-stack
+          - cards:
+              - brightness: true
+                color_picker: true
+                color_temp: true
+                color_wheel: true
+                effects_list: true
+                entity: light.princess_gabrielle
+                group: true
+                header: ''
+                persist_features: true
+                style: |
+                  ha-card {
+                  border-radius: 40px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                type: 'custom:light-entity-card'
+                white_value: true
+              - brightness: true
+                color_picker: true
+                color_temp: true
+                color_wheel: true
+                effects_list: true
+                entity: light.prince_nathaniel
+                group: true
+                header: ''
+                persist_features: true
+                style: |
+                  ha-card {
+                  border-radius: 40px;
+                  box-shadow: 2px 5px 5px grey;
+                   }
+                type: 'custom:light-entity-card'
+                white_value: true
+            type: horizontal-stack
+        entities: null
+        style: |
+          ha-card {
+            border-radius: 40px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: vertical-stack
+    icon: 'mdi:lightbulb-on'
+    panel: false
+    path: lights
+    theme: default
+    title: Lights
+  - badges: []
+    cards:
+      - cards:
+          - entity: sensor.livingroom_temperature_5
+            max: 80
+            min: 60
+            name: Livingroom Temp
+            severity:
+              green: 71
+              red: 80
+              yellow: 76
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+               }
+            type: gauge
+            unit: °F
+          - color_thresholds:
+              - color: '#2BBF38'
+                value: 71
+              - color: '#FF7519'
+                value: 76
+              - color: '#D03E2E'
+                value: 80
+            entities:
+              - sensor.livingroom_humidity_3
+            name: Livingroom Humidity
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+               }
+            theme: default
+            type: 'custom:mini-graph-card'
+            unit: '%'
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        title: Livingroom
+        type: horizontal-stack
+      - cards:
+          - entity: sensor.bedroom_temperature
+            max: 80
+            min: 60
+            name: Bedroom Temp
+            severity:
+              green: 71
+              red: 80
+              yellow: 76
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+               }
+            type: gauge
+            unit: °F
+          - color_thresholds:
+              - color: '#2BBF38'
+                value: 71
+              - color: '#FF7519'
+                value: 76
+              - color: '#D03E2E'
+                value: 80
+            entities:
+              - sensor.bedroom_humidity
+            name: Bedroom Humidity
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+               }
+            theme: default
+            type: 'custom:mini-graph-card'
+            unit: '%'
+        style: |
+          ha-card {
+            border-radius: 55px;
+          }
+        title: Livingroom
+        type: horizontal-stack
+      - cards:
+          - cards:
+              - entities:
+                  - sensor.livingroom_temperature_5
+                name: Current Temperature
+                style: |
+                  ha-card {
+                  border-radius: 55px;
+                  box-shadow: 2px 5px 5px grey;
+                  }
+                type: 'custom:mini-graph-card'
+              - entities:
+                  - sensor.set_temperature
+                icon: 'mdi:target'
+                name: Target Temperature
+                style: |
+                  ha-card {
+                  border-radius: 55px;
+                  box-shadow: 2px 5px 5px grey;
+                  }
+                type: 'custom:mini-graph-card'
+                unit_of_measurement: F
+            type: horizontal-stack
+          - entity: climate.unnamed_device
+            style: |
+              ha-card {
+                background-image: url("/local/nest4.png");
+                background-size: 100% 110%;
+                background-position: 0% 0%;
+                background-repeat: no-repeat;
+                background-color: rgba(255, 255, 255, 0.01);
+                width: 100%;
+                height: 110%;
+                #box-shadow: 2px 5px 5px grey;
+                }
+               .rs-inner-container{
+                visibility: hidden;
+                }
+               .rs-overlay{
+                visibility: hidden;
+                }
+               .rs-handle{
+                width: 50px;
+                height: 50px;
+                background-color: #23232e00
+                }
+
+               #set-temperature {
+                font-size: 650%;
+                color: white;
+                top: 770%;
+                }
+               .current-temperature-text{
+                visibility: hidden;
+                font-size: 70%;
+                color: grey;
+                left: 80;
+                }
+               .uom{
+                #visibility: hidden;
+                }
+               .climate-info {
+                top: 50%;
+                }
+            type: thermostat
+        type: vertical-stack
+    icon: 'mdi:thermometer-lines'
+  - badges: []
+    cards:
+      - entities:
+          - artwork: cover
+            entity: media_player.everywhere
+            group: true
+            info: short
+            power: true
+            show_tts: alexa
+            source: icon
+            type: 'custom:mini-media-player'
+            volume: true
+          - artwork: cover
+            controls: true
+            entity: media_player.livingroom
+            group: true
+            info: short
+            show_tts: alexa
+            type: 'custom:mini-media-player'
+          - artwork: cover
+            controls: true
+            entity: media_player.bedroom
+            group: true
+            info: short
+            show_tts: alexa
+            type: 'custom:mini-media-player'
+          - artwork: cover
+            controls: true
+            entity: media_player.deveraux_s_echo_dot
+            group: true
+            platform: google
+            power: true
+            show_tts: google_translate
+            source: icon
+            type: 'custom:mini-media-player'
+            volume: true
+          - artwork: cover
+            controls: true
+            entity: media_player.gabrielles_room_speaker
+            group: true
+            platform: google
+            power: true
+            show_tts: google_translate
+            source: icon
+            type: 'custom:mini-media-player'
+            volume: true
+        show_header_toggle: false
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        title: Audio
+        type: entities
+      - client_id: a60833a8236444cfa9e52758ec98a54c
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: 'custom:spotify-card'
+      - artwork: cover
+        entity: media_player.spotify
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: 'custom:mini-media-player'
+    icon: 'mdi:library-music'
+    theme: default
+    title: Media
+  - badges: []
+    cards:
+      - entities:
+          - entity: input_select.living_room_tv
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: entities
+      - entities:
+          - entity: input_select.logitech_template
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: entities
+      - elements:
+          - entity: /local/tvremote.png
+            type: image
+        image: /local/blank.png
+        style: |
+          ha-card {
+            border-radius: 55px;
+          }
+        type: picture-elements
+      - elements:
+          - entity: switch.bedroom_tv_power
+            icon: 'mdi:blank'
+            style:
+              left: 14%
+              top: 17%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_netflix
+            icon: 'mdi:blank'
+            style:
+              left: 14%
+              top: 95%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_left
+            icon: 'mdi:blank'
+            style:
+              left: 18%
+              top: 50%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_right
+            icon: 'mdi:blank'
+            style:
+              left: 78%
+              top: 49%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_up
+            icon: 'mdi:blank'
+            style:
+              left: 49%
+              top: 32%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_down
+            icon: 'mdi:blank'
+            style:
+              left: 50%
+              top: 67%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_ok
+            icon: 'mdi:blank'
+            style:
+              left: 50%
+              top: 50%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_back
+            icon: 'mdi:blank'
+            style:
+              left: 84%
+              top: 16%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_vol_up
+            icon: 'mdi:blank'
+            style:
+              left: 16%
+              top: 31%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_vol_down
+            icon: 'mdi:blank'
+            style:
+              left: 16%
+              top: 68%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_menu
+            icon: 'mdi:blank'
+            style:
+              left: 61%
+              top: 17%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_mute
+            icon: 'mdi:blank'
+            style:
+              left: 38%
+              top: 16%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_play
+            icon: 'mdi:blank'
+            style:
+              left: 61%
+              top: 83%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.bedroom_tv_pause
+            icon: 'mdi:blank'
+            style:
+              left: 39%
+              top: 83%
+            tap_action:
+              action: toggle
+            type: state-icon
+        image: /local/tvremote2.png
+        style: |
+          ha-card {
+            border-radius: 40px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: picture-elements
+      - elements:
+          - entity: /local/tvremote.png
+            type: image
+        image: /local/blank.png
+        type: picture-elements
+      - elements:
+          - entity: /local/tvremote.png
+            type: image
+        image: /local/blank.png
+        type: picture-elements
+      - elements:
+          - entity: /local/tvremote.png
+            type: image
+        image: /local/blank.png
+        type: picture-elements
+    icon: 'mdi:remote'
+    theme: default
+    title: Remotes
+  - badges: []
+    cards:
+      - dark_mode: false
+        default_zoom: 15
+        entities:
+          - entity: device_tracker.life360_deveraux
+          - entity: device_tracker.hostname1
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        title: Tracker
+        type: map
+      - entities:
+          - entity: sensor.phone_to_home
+            name: Phone to Home
+          - entity: sensor.home_to_work
+            entity_picture: /local/bmw2.png
+            name: Work
+          - entity: sensor.home_to_walmart
+            name: Walmart
+          - entity: sensor.home_to_tucson
+            name: Tucson
+          - entity: sensor.home_to_phoenix
+            name: Phoenix
+        show_header_toggle: false
+        style: |
+          ha-card {
+            border-radius: 55px;
+            background-image: url("/local/car.jpg");
+            background-size: 500px 330px;
+            color: #00ff00;
+            font-size: 150%;
+            box-shadow: 2px 5px 5px grey;
+          }
+        title: Travel Times
+        type: entities
+    icon: 'mdi:crosshairs-gps'
+    panel: false
+    path: Life360
+    theme: default
+    title: Tracker
+  - badges: []
+    cards:
+      - aspect_ratio: 160%
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        type: iframe
+        url: 'http://192.168.1.22:8123/a0d7b954_grocy'
+      - style: |
+          ha-card {
+            border-radius: 45px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        title: Shopping List
+        type: shopping-list
+    icon: 'mdi:cart-arrow-down'
+    theme: default
+  - badges: []
+    cards:
+      - entities:
+          - entity: sensor.glances_cpu_used
+          - entity: sensor.glances_ram_used_percent
+          - entity: sensor.glances_disk_used_percent_2
+          - entity: sensor.glances_ram_free
+        show_header_toggle: false
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        theme: default
+        type: entities
+      - entities:
+          - entity: sensor.speedtest_ping
+          - entity: sensor.speedtest_upload
+          - entity: sensor.speedtest_download
+          - entity: script.1564284483522
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        theme: default
+        type: entities
+      - cards:
+          - entities:
+              - binary_sensor.sonoff_rf_bridge_status
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+              }
+            type: history-graph
+          - entities:
+              - binary_sensor.sonoff_rf_bridge_status
+            name: RF Bridge Status
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+              }
+            type: entities
+          - cards:
+              - entities:
+                  - sensor.sonoff_rf_bridge_uptime_new
+                name: UpTime
+                style: |
+                  ha-card {
+                  border-radius: 55px;
+                  box-shadow: 2px 5px 5px grey;
+                  }
+                type: entities
+              - animate: true
+                entities:
+                  - sensor.sonoff_rf_bridge_wifi_signal_2
+                line_color: lime
+                name: Signal Strength
+                style: |
+                  ha-card {
+                  border-radius: 55px;
+                  box-shadow: 2px 5px 5px grey;
+                  }
+                type: 'custom:mini-graph-card'
+            type: vertical-stack
+        type: vertical-stack
+      - entities:
+          - entity: sensor.adguard_average_processing_speed
+          - entity: sensor.adguard_dns_queries
+          - entity: sensor.adguard_dns_queries_blocked
+          - entity: switch.adguard_parental_control
+          - entity: switch.adguard_protection
+        show_header_toggle: false
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        theme: default
+        title: Ad Guard
+        type: entities
+      - entities:
+          - entity: binary_sensor.bigdog_printing
+            icon: 'mdi:water-percent'
+            name: Printing Status
+          - entity: binary_sensor.bigdog_printing_error
+            icon: 'mdi:temperature-fahrenheit'
+            name: Error Status
+          - entity: sensor.bigdog_current_state
+            icon: 'mdi:water-percent'
+            name: Current State
+          - entity: sensor.bigdog_job_percentage
+            icon: 'mdi:temperature-fahrenheit'
+            name: Job Percent
+          - entity: sensor.bigdog_actual_tool0_temp
+          - entity: sensor.bigdog_target_tool1_temp
+          - entity: sensor.bigdog_time_elapsed
+          - entity: sensor.bigdog_time_remaining
+        show_header_toggle: false
+        style: |
+          ha-card {
+            border-radius: 55px;
+            box-shadow: 2px 5px 5px grey;
+          }
+        theme: default
+        title: 3D Printer
+        type: entities
+      - cards:
+          - entities:
+              - script.1564284483522
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+              }
+            type: entities
+          - entities:
+              - sensor.speedtest_upload
+              - sensor.speedtest_download
+              - sensor.speedtest_ping
+            graph: bar
+            hours_to_show: 5
+            style: |
+              ha-card {
+              border-radius: 55px;
+              box-shadow: 2px 5px 5px grey;
+              }
+            type: 'custom:mini-graph-card'
+        type: vertical-stack
+    icon: 'mdi:speedometer'
+  - badges:
+      - sensor.bigdog_actual_tool0_temp
+      - sensor.bigdog_target_tool0_temp
+      - sensor.bigdog_actual_tool1_temp
+      - sensor.bigdog_target_tool1_temp
+      - sensor.bigdog_current_state
+      - sensor.bigdog_job_percentage
+      - sensor.bigdog_time_remaining
+      - sensor.bigdog_time_elapsed
+    cards:
+      - cards:
+          - aspect_ratio: 180%
+            title: Octoprint
+            type: iframe
+            url: 'http://192.168.1.7'
+          - aspect_ratio: 160%
+            title: Duet
+            type: iframe
+            url: 'http://192.168.1.4'
+        panel: true
+        type: vertical-stack
+    icon: 'mdi:printer-3d-nozzle'
+    panel: true
+    theme: Backend-selected
+  - background: left 0% / 100% 85% no-repeat url("/local/rainbird.jpg") fixed
+    badges: []
+    cards:
+      - cards:
+          - entities:
+              - entity: sensor.soil_front_moisture
+                name: Front
+              - entity: sensor.soil_front_moisture
+                name: Back
+              - entity: sensor.soil_front_moisture
+                name: Side
+              - entity: sensor.soil_front_moisture
+                name: Plants
+            icon: 'mdi:water-percent'
+            name: SOIL MOISTURE
+            style: |
+              ha-card {
+              border-radius: 55px;
+              background-color: rgba(255, 255, 255, 0.4);
+              color: black;
+              font-weight: 1000;
+              font-size: 150%;
+              box-shadow: 2px 5px 5px grey;
+               }
+            type: 'custom:mini-graph-card'
+          - cards:
+              - action: toggle
+                entity: light.king_deveraux
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Front Yard
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(0%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+              - action: toggle
+                entity: light.king_deveraux
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Back Yard
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(10%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+              - action: toggle
+                entity: light.king_deveraux
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Side Yard
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(0%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+              - action: toggle
+                entity: light.king_deveraux
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Plants
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(0%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+              - action: toggle
+                entity: light.king_deveraux
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: All Zones
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(0%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - entities:
+              - entity: light.king_deveraux
+                icon: 'mdi:water-pump'
+                name: Plants Last Watered
+                secondary_info: last-changed
+                show_header_toggle: false
+            style: |
+              ha-card {
+              border-radius: 55px;
+              background-color: rgba(255, 255, 255, 0.4);
+              color: black;
+              font-weight: 1000;
+              font-size: 150%;
+              box-shadow: 2px 5px 5px grey;
+              }
+              toggle-button {
+              display: none;
+              }
+            type: entities
+        type: vertical-stack
+    icon: 'mdi:flower-outline'
+    path: garden
+  - background: left 0% / 100% 100% no-repeat url("/local/fishtank.jpg") fixed
+    badges: []
+    cards:
+      - cards:
+          - entities:
+              - entity: sensor.soil_front_moisture
+                name: Humidity
+              - entity: sensor.soil_front_moisture
+                name: Water Temp
+              - entity: sensor.soil_front_moisture
+                name: PH
+              - entity: sensor.soil_front_moisture
+                name: Ammonia
+              - entity: sensor.soil_front_moisture
+                name: Water Level
+            icon: 'mdi:water-percent'
+            name: Fish Tank Monitor
+            style: |
+              ha-card {
+              border-radius: 55px;
+              background-color: rgba(255, 255, 255, 0.4);
+              color: black;
+              font-weight: 1000;
+              font-size: 150%;
+              box-shadow: 2px 5px 5px grey;
+               }
+            type: 'custom:mini-graph-card'
+          - cards:
+              - action: toggle
+                entity: switch.barlight
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Pump
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(0%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                    - background-color: '{% if is_state("switch.barlight", "on")%}green{%endif%}'
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+              - action: toggle
+                entity: light.king_deveraux
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Feed
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(10%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+              - action: toggle
+                entity: switch.fishlight
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Main Light
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(0%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+              - action: toggle
+                entity: light.king_deveraux
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Mood Light
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(0%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+              - action: toggle
+                entity: light.king_deveraux
+                icon: 'mdi:sprinkler'
+                lock: true
+                name: Skimmer
+                show_state: false
+                state:
+                  - styles:
+                      card:
+                        - filter: opacity(50%)
+                      icon:
+                        - filter: grayscale(100%)
+                    value: 'off'
+                  - card:
+                      - filter: opacity(100%)
+                    icon:
+                      - filter: grayscale(0%)
+                    styles: null
+                    value: 'on'
+                styles:
+                  card:
+                    - border-radius: 10px
+                    - width: 90px
+                    - height: 90px
+                    - box-shadow: 2px 5px 5px grey
+                  grid:
+                    - grid-template-areas: '"i" "n" "s"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: 1fr min-content min-content
+                  img_cell:
+                    - align-self: start
+                    - text-align: start
+                  name:
+                    - justify-self: start
+                    - padding-left: 5px
+                    - font-weight: bold
+                  state:
+                    - justify-self: start
+                    - padding-left: 5px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - entities:
+              - entity: light.king_deveraux
+                icon: 'mdi:water-pump'
+                name: Fish Last Fed
+                secondary_info: last-changed
+                show_header_toggle: false
+            style: |
+              ha-card {
+              border-radius: 55px;
+              background-color: rgba(255, 255, 255, 0.4);
+              color: black;
+              font-weight: 1000;
+              font-size: 150%;
+              box-shadow: 2px 5px 5px grey;
+              }
+              toggle-button {
+              display: none;
+              }
+            type: entities
+        type: vertical-stack
+      - aspect_ratio: 95%
+        type: iframe
+        url: /local/html/fish.html
+    icon: 'mdi:fish'
+  - badges: []
+    cards: []
+    icon: 'mdi:resistor'
+  - badges: []
+    cards:
+      - hold_action:
+          action: none
+        image: /local/lroom.png
+        tap_action:
+          action: none
+        type: picture
+    icon: 'mdi:floor-plan'
+  - badges: null
+    cards:
+      - cards:
+          - entities:
+              - entity: input_select.timer_list
+              - entity: input_text.timer_string
+              - entity: input_select.timer_entity_id
+              - entity: input_select.timer_to_state
+              - entity: script.timer_x_init
+              - entity: script.timer_x_cancel
+            show_header_toggle: false
+            style: >
+              ha-card {
+
+              border-radius: 55px; box-shadow: 2px 5px 5px grey;
+
+              background-color: [[ if(timer.timer_0 == 'active', "rgba(255, 0,
+              0, 0.43)") ]];
+                                             
+              }
+            title: Timers
+            type: entities
+          - card:
+              entities:
+                - entity: timer.timer_0
+              type: entities
+            conditions:
+              - entity: timer.timer_0
+                state_not: idle
+                style: >
+                  ha-card {
+
+                  border-radius: 55px; box-shadow: 2px 5px 5px grey;
+
+                  background-color: [[ if(timer.timer_0 == 'active', "rgba(255,
+                  0, 0, 0.43)") ]];
+                                              
+                  }
+            type: conditional
+          - card:
+              entities:
+                - entity: timer.timer_1
+              type: entities
+            conditions:
+              - entity: timer.timer_1
+                state_not: idle
+            type: conditional
+          - card:
+              entities:
+                - entity: timer.timer_2
+              type: entities
+            conditions:
+              - entity: timer.timer_2
+                state_not: idle
+            type: conditional
+          - card:
+              entities:
+                - entity: timer.timer_3
+              type: entities
+            conditions:
+              - entity: timer.timer_3
+                state_not: idle
+            type: conditional
+          - card:
+              entities:
+                - entity: timer.timer_4
+              type: entities
+            conditions:
+              - entity: timer.timer_4
+                state_not: idle
+            type: conditional
+        type: vertical-stack
+      - content: |-
+          ### Timer 0
+          state:  [[ timer.timer_0.state ]]
+          total duration: [[ timer.timer_0.attributes.duration ]]
+          task: [[ input_text.timer_0_task ]]
+          ### Timer 1
+          state: [[ timer.timer_1 ]]
+          total duration: [[ timer.timer_1.attributes.duration ]]
+          task: [[ input_text.timer_1_task ]]
+          ### Timer 2
+          state: [[ timer.timer_2 ]]
+          total duration: [[ timer.timer_2.attributes.duration ]]
+          task: [[ input_text.timer_2_task ]]
+          ### Timer 3
+          state: [[ timer.timer_3 ]]
+          total duration: [[ timer.timer_3.attributes.duration ]]
+          task: [[ input_text.timer_3_task ]]
+          ### Timer 4
+          state: [[ timer.timer_4 ]]
+          total duration: [[ timer.timer_4.attributes.duration ]]
+          task: [[ input_text.timer_4_task ]]
+        style: >
+          ha-card {
+
+          border-radius: 55px; box-shadow: 2px 5px 5px grey;
+
+          background-color: [[ if(timer.timer_0 == 'active', "rgba(255, 0, 0,
+          0.43)") ]];
+                                         
+          }
+        title: Timer Status
+        type: markdown
+    icon: 'mdi:timer'
+    path: timer
+    title: Timer
+  - badges: []
+    cards:
+      - default_open: false
+        dismiss_default: false
+        hold_action:
+          action: url
+          url: 'https://www.home-assistant.io'
+        icon: 'mdi:home'
+        items:
+          - entity: light.king_deveraux
+            hold_action:
+              action: more-info
+            icon: /local/bulb.png
+            name: Bedroom Light
+            tap_action:
+              action: toggle
+              haptic: true
+          - entity: alarm_control_panel.ha_alarm
+            icon: 'mdi:alarm-light'
+            name: Alarm Panel
+            tap_action:
+              action: url
+              url: 'http://192.168.1.22:8123/lovelace/alarm'
+          - hold_action:
+              action: call-service
+              haptic: true
+              service: timer.pause
+              service_data:
+                entity_id: timer.laundry
+            icon: 'mdi:alarm'
+            name: Timer
+            tap_action:
+              action: call-service
+              haptic: true
+              service: timer.start
+              service_data:
+                entity_id: timer.laundry
+        name: Home
+        style: |
+          ha-card {
+            border-radius: 55px;
+          }
+        type: 'custom:radial-menu'
+      - entity: light.wled_light
+        type: light
+    theme: default
+    title: live tests
