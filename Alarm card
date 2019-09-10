@@ -1,0 +1,41 @@
+cards:
+  - entities:
+      - entity: alarm_control_panel.ha_alarm
+        name: Alarm History
+    hours_to_show: 6
+    refresh_interval: 15
+    style: |
+      ha-card {
+      border-radius: 55px;
+      height: 65px
+      box-shadow: 2px 5px 5px grey;
+      }
+    type: history-graph
+  - entity: alarm_control_panel.ha_alarm
+    states:
+      - arm_home
+      - arm_away
+      - arm_night
+    style:
+      '#keypad mwc-button':
+        $: |
+          :host {
+          background: white;
+          border-radius: 45px;
+          box-shadow: 2px 5px 5px grey;
+           }
+           button {
+           font-size: 18.5px !important;
+           }
+        .: |
+          ha-card {border-radius: 55px;
+          background-size: 500px 500px;
+          background-opacity: 0.5;
+          background-position-y: 40px;
+            --mdc-theme-primary: blue;
+          ###box-shadow: '3px 3px rgba(0,0,0,0.4)';
+          box-shadow: 2px 5px 5px grey;
+
+          }
+    type: alarm-panel
+type: vertical-stack
