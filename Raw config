@@ -291,7 +291,7 @@ views:
                 color_stops:
                   '0': 'rgba(0,0,0,0.0)'
                   '100': 'rgba(0,0,0,0.0)'
-                entity: device_tracker.life360_deveraux
+                entity: device_tracker.xxxx
                 fill: 'rgba(0,0,0,0.0)'
                 font_style:
                   color: 'rgba(0,255,0,0.9)'
@@ -307,7 +307,7 @@ views:
                   width: 100px
                 type: 'custom:circle-sensor-card'
             type: conditional
-          - entity: device_tracker.life360_deveraux
+          - entity: device_tracker.xxxx
             state_image:
               away: /local/codyBW2.png
               home: /local/cody2.png
@@ -322,7 +322,7 @@ views:
               '0': '#ff0000'
               '50': '#ffe600'
               '100': '#009919'
-            entity: device_tracker.life360_deveraux
+            entity: device_tracker.xxxx
             fill: 'rgba(0,0,0,0.0)'
             font_style:
               color: 'rgba(200,56,123,0.9)'
@@ -394,7 +394,7 @@ views:
             dateSize: 90
             dayWrapperLineColor: black
             dimFinishedEvents: true
-            entity: calendar.codycato1882_gmail_com
+            entity: calendar.xxxx
             eventBarColor: blue
             finishedEventFilter: grayscale(100%)
             finishedEventOpacity: 0.6
@@ -598,7 +598,7 @@ views:
     cards:
       - cards:
           - entity: weather.dark_sky
-            name: Fort Huachuca
+            name: Fort xxx
             style: |
               ha-card {
               border-radius: 55px;
@@ -668,7 +668,7 @@ views:
            }
         type: iframe
         url: >-
-          https://embed.windy.com/embed2.html?lat=31.596&lon=-110.405&zoom=9&level=surface&overlay=temp&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=31.756&detailLon=-110.064&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1
+          https://embed.windy.com/embed2.html?lat=31.xxxx&lon=-11.xxx&zoom=9&level=surface&overlay=temp&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=31.756&detailLon=-110.064&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1
     icon: 'mdi:weather-cloudy'
     theme: default
     title: Weather
@@ -1053,7 +1053,7 @@ views:
           }
         title: Audio
         type: entities
-      - client_id: a60833a8236444cfa9e52758ec98a54c
+      - client_id: xxxxxxxxxxxxxxxxxxxxx
         style: |
           ha-card {
             border-radius: 55px;
@@ -1241,8 +1241,8 @@ views:
       - dark_mode: false
         default_zoom: 15
         entities:
-          - entity: device_tracker.life360_deveraux
-          - entity: device_tracker.hostname1
+          - entity: device_tracker.xxxxxx
+          - entity: device_tracker.xxxxxx
         style: |
           ha-card {
             border-radius: 55px;
@@ -1288,7 +1288,7 @@ views:
             box-shadow: 2px 5px 5px grey;
           }
         type: iframe
-        url: 'http://192.168.1.22:8123/a0d7b954_grocy'
+        url: 'http://xxxxxx'
       - style: |
           ha-card {
             border-radius: 45px;
@@ -1444,11 +1444,11 @@ views:
           - aspect_ratio: 180%
             title: Octoprint
             type: iframe
-            url: 'http://192.168.1.7'
+            url: 'http://xxxx'
           - aspect_ratio: 160%
             title: Duet
             type: iframe
-            url: 'http://192.168.1.4'
+            url: 'http://xxxx'
         panel: true
         type: vertical-stack
     icon: 'mdi:printer-3d-nozzle'
