@@ -1,0 +1,27 @@
+  - platform: kodi
+    host: 192.168.1.8
+
+  - platform: samsungtv
+    host: 192.168.1.15
+    
+
+  - platform: plex
+    show_all_controls: false
+    use_episode_art: true
+    remove_unavailable_clients: true
+    client_remove_interval: 600
+    
+ # - platform: androidtv
+ ##   host: 192.168.1.32
+  #  name: "Fire TV"
+ #   adb_server_ip: 127.0.0.1
+ #   adb_server_port: 5037
+ #   apps:
+ #     com.amazon.tv.launcher: "Fire TV"
+ #   turn_on_command: "input keyevent 3"
+ #   turn_off_command: "input keyevent 223"
+
+    
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret

@@ -1,0 +1,40 @@
+
+  light_group:
+    name: "Light Group"
+    control: hidden
+    entities:
+      - light.king_deveraux
+      - light.livingroom
+      
+  door_windw_sensor_group:
+    name: " Door and Window Sensors Group"
+    control: hidden
+    entities:
+      - binary_sensor.back_door_2
+      - binary_sensor.front_door_2
+      - binary_sensor.front_door_tamper_sensor_2
+      - binary_sensor.back_door_tamper_sensor
+      
+  morning_commute_group:
+    name: "Mornin Commute"
+    control: hidden
+    entities:
+      - sensor.home_to_work
+      - sensor.home_to_tucson
+      - sensor.home_to_walmart
+      - sensor.home_to_phoenix
+      
+  lights:
+    control: hidden
+    entities:
+      - light.king_deveraux
+      - light.livingroom
+
+  timers:
+    control: hidden
+    entities:
+      - timer.timer_0
+      - timer.timer_1
+      - timer.timer_2
+      - timer.timer_3
+      - timer.timer_4

@@ -1,0 +1,11 @@
+#timer:
+  laundry:
+    duration: '00:01:00'
+    
+#timer:
+  # timers
+  timer_0:
+  timer_1:
+  timer_2:
+  timer_3:
+  timer_4:

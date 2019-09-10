@@ -1,0 +1,206 @@
+dash_button_test:
+  alias: Dash Button Test
+  sequence:
+  - service: notify.alexa_media
+    data:
+      target: media_player.bedroom
+      message: Hi Cody, how is your programming going?
+      data:
+        type: tts
+alexa:
+  alias: alexa voice
+  sequence:
+  - data:
+      data:
+        type: tts
+      message: this is just a test
+      target:
+      - group.alexa
+      - Guest Room
+      - media_player.bedroom
+      - serialNumber
+    service: notify.alexa_media_bedroom
+  - alias: ''
+    data:
+      entity_id: light.king_deveraux
+    service: light.turn_off
+alarm:
+  alias: Alarm
+  sequence:
+  - data:
+      data:
+        type: tts
+      message: Alarm system has been triggered, you have 30 seconds to disarm, or
+        law enforcement will be alerted!
+      target:
+      - group.alexa
+      - Guest Room
+      - media_player.bedroom
+      - serialNumber
+    service: notify.alexa_media_bedroom
+  - data:
+      entity_id: light.king_deveraux
+    service: light.turn_on
+  - data:
+      color_name: blue
+    service: light.lifx_set_state
+  - data:
+      brightness: 255
+      color_name: red
+      cycles: 20
+      entity_id: light.king_deveraux
+      mode: blink
+      period: 1
+    service: light.lifx_effect_pulse
+  - data:
+      message: Alarm Triggered
+    service: notify.push_bullet
+'1563935745812':
+  alias: trigger alarm
+  sequence:
+  - data: {}
+    service: alarm_control_panel.alarm_trigger
+check_config:
+  sequence: []
+  alias: Check Configuration
+'1564284483522':
+  alias: Run Speed Test
+  sequence:
+  - data: {}
+    service: speedtestdotnet.speedtest
+'1564460819134':
+  alias: Back door open
+  sequence:
+  - data:
+      data:
+        type: tts
+      message: back door open!
+      target:
+      - group.alexa
+      - Guest Room
+      - media_player.bedroom
+      - serialNumber
+    service: notify.alexa_media_bedroom
+'1564463579060':
+  alias: backdoor closed
+  sequence:
+  - data:
+      data:
+        type: tts
+      message: back door closed!
+      target:
+      - group.alexa
+      - Guest Room
+      - media_player.bedroom
+      - serialNumber
+    service: notify.alexa_media_bedroom
+'1564518937343':
+  alias: front door open
+  sequence:
+  - data:
+      data:
+        type: tts
+      message: front door open!
+      target:
+      - group.alexa
+      - Guest Room
+      - media_player.bedroom
+      - serialNumber
+    service: notify.alexa_media_bedroom
+'1564518998656':
+  alias: front door closed
+  sequence:
+  - data:
+      data:
+        type: tts
+      message: front door closed!
+      target:
+      - group.alexa
+      - Guest Room
+      - media_player.bedroom
+      - serialNumber
+    service: notify.alexa_media_bedroom
+'1564519034231':
+  alias: back door tampered
+  sequence:
+  - data:
+      data:
+        type: tts
+      message: back door tampered!
+      target:
+      - group.alexa
+      - Guest Room
+      - media_player.bedroom
+      - serialNumber
+    service: notify.alexa_media_bedroom
+    
+
+timer_x_init:
+  sequence:
+  # record action to be done when timer finished
+  - service: script.timer_x_update_task_message
+  # start timer
+  - service: timer.start
+    data_template:
+      entity_id: >-
+        {{-"timer."-}}{{- states("input_select.timer_list") -}}
+      duration: >-
+        {{(states('input_text.timer_string'))}}
+
+timer_x_execute:
+  sequence:
+  # execute recorded action
+  - service_template: >-
+      {%- if not timer -%}
+        {%- set timer = 'timer.timer_1' -%}
+      {%- endif -%}
+      {%- set domain_name = timer.split('.') -%} 
+      {%- set read_action = 'input_text.'+domain_name[1] + '_task' -%}
+      {%- set action = states(read_action).split(' ') -%}
+      {% set domain_name = action[1].split('.') %}
+      {{- domain_name[0] -}} {{-'.'-}} {{- action[0] -}}
+    data_template:
+      entity_id: >-
+        {%- if not timer -%}
+          {%- set timer = 'timer.timer_0' -%}
+        {%- endif -%}
+        {%- set domain_name = timer.split('.') -%} 
+        {%- set read_action = 'input_text.' + domain_name[1] + '_task' -%}
+        {%- set ent_id = states(read_action).split(' ') -%}
+        {{-ent_id[1]-}}
+  # clear stored action
+  - service: input_text.set_value
+    data_template:
+        entity_id: >-
+          {%- if not timer -%}
+            {%- set timer = 'timer.timer_0' -%}
+          {%- endif -%}
+          {%- set domain_name = timer.split('.') -%} 
+          {{"input_text."}}{{ domain_name[1] }}{{"_task"}}
+        value: 'unknown'
+
+timer_x_cancel:
+  sequence:
+  # cancel timer
+  - service: timer.cancel
+    data_template:
+      entity_id: >-
+        {{-"timer."-}}{{- states("input_select.timer_list") -}}
+  # clear stored action
+  - service: input_text.set_value
+    data_template:
+        entity_id: >-
+          {%- if not timer -%}
+            {%- set timer = 'timer.timer_0' -%}
+          {%- endif -%}
+          {%- set domain_name = timer.split('.') -%} 
+          {{"input_text."}}{{ domain_name[1] }}{{"_task"}}
+        value: 'unknown'
+
+timer_x_update_task_message:
+  sequence:
+  # read action to perform at end of timer
+  - service: input_text.set_value
+    data_template:
+        entity_id: '{{"input_text."}}{{ states("input_select.timer_list") }}{{"_task"}}'
+        value: '{{states("input_select.timer_to_state")}}{{" "}}{{ states("input_select.timer_entity_id") }}'

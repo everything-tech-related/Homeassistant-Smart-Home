@@ -1,0 +1,66 @@
+device_tracker.life360_deveraux:
+  Name: Cody
+  friendly_name: Cody
+sensor.potential_breaking_changes:
+  friendly_name: Config Errors
+device_tracker.hostname1:
+  entity_picture: '"/local/sash.jpg"'
+  friendly_name: Sashya
+sensor.hacs:
+  friendly_name: Updates
+  input_boolean.weather:
+    config:
+      weather: weather.yweather
+      sun: sun.sun
+alarm_control_panel.ha_alarm:
+  friendly_name: Alarm
+sensor.sonoff_rf_bridge_uptime_new:
+  friendl_name: Sonoff Uptime
+  friendly_name: Sonoff Uptime
+switch.barlight:
+  friendly_name: Fish Pump
+sensor.bigdog_current_state:
+  friendly_name: Current State
+sensor.bigdog_job_percentage:
+  friendly_name: Job Percentage
+binary_sensor.bigdog_printing:
+  friendly_name: Printing
+binary_sensor.bigdog_printing_error:
+  friendly_name: Printing Error
+sensor.bigdog_time_elapsed:
+  friendly_name: Time Elapsed
+sensor.bigdog_time_remaining:
+  friendly_name: Time Remaining
+sensor.bigdog_actual_tool0_temp:
+  friendly_name: tool0 actual temp
+sensor.bigdog_actual_tool1_temp:
+  friendly_name: tool1 actual temp
+sensor.bigdog_target_tool0_temp:
+  friendly_name: tool0 target  temp
+sensor.bigdog_target_tool1_temp:
+  friendly_name: tool1 target temp
+sensor.home_to_work:
+  entity_picture: /local/bmw1.png
+sensor.home_to_tucson:
+  entity_picture: /local/bmw1.png
+sensor.home_to_walmart:
+  entity_picture: /local/bmw1.png
+sensor.home_to_phoenix:
+  entity_picture: /local/bmw1.png
+sensor.aftership_sensor:
+  custom_ui_state_card: state-card-aftership
+sensor.speedtest_download:
+  unit_of_measurement: MB/s
+sensor.speedtest_upload:
+  unit_of_measurement: MB/s
+sensor.phone_to_home:
+  entity_picture: /local/bmw1.png
+sensor.plants_last_watered:
+  friendly_name: Plants Last Watered
+  icon: mdi:water-pump
+script.timer_x_init:
+  friendly_name: 'Run Timer'
+  icon: mdi:timer
+script.timer_x_cancel:
+  friendly_name: 'Cancel Timer'
+  icon: mdi:cancel

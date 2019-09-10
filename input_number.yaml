@@ -1,0 +1,32 @@
+  slider1:
+    name: Slider
+    initial: 30
+    min: -20
+    max: 35
+    step: 1
+  box1:
+    name: Numeric Input Box
+    initial: 30
+    min: -20
+    max: 35
+    step: 1
+    mode: box
+    
+  previous_local_temp_heat:
+    name: Previous Local Heat Temperature
+    initial: 71
+    min: 0
+    max: 100
+    step: 1
+    mode: box
+    icon: mdi:gauge
+    
+    
+  previous_local_temp_cool:
+    name: Previous Local Cool Temperature
+    initial: 75
+    min: 0
+    max: 100
+    step: 1
+    mode: box
+    icon: mdi:gauge

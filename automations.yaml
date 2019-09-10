@@ -1,0 +1,717 @@
+- alias: Trigger alarm while armed home or away
+  trigger:
+  - platform: state
+    entity_id: switch.alarm_toggle
+    to: 'on'
+  condition:
+  action:
+  - service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.alarm
+  id: 3b1859bb63ed420f8527a7c48c4779ce
+- id: update_morning_commute_sensor
+  alias: "Commute - Update morning commute sensor"
+  initial_state: 'on'
+  trigger:
+    - platform: time_pattern
+      minutes: '/5'
+  condition:
+    - condition: time
+      after: '05:00:00'
+      before: '21:00:00'
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+        - sun
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.morning_commute
+- id: '1564066505357'
+  alias: alarm
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: triggered
+  - entity_id: script.1563935745812
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: script.alarm
+- alias: Interface - Set UI theme
+  id: switch_hass_template
+  initial_state: true
+  trigger:
+  - platform: homeassistant
+    event: start
+  - platform: state
+    entity_id: input_select.hass_template
+  action:
+  - service: frontend.set_theme
+    data_template:
+      name: '{{ states.input_select.hass_template.state }}'
+- id: day_to_night_theme
+  alias: day_to_night_theme
+  trigger:
+  - event: start
+    platform: homeassistant
+  - entity_id: sun.sun
+    platform: state
+    to: below_horizon
+  action:
+  - data:
+      entity_id: input_select.hass_template
+      option: Dark-Blue
+    service: input_select.select_option
+- id: night_to_day_theme
+  alias: night_to_day_theme
+  trigger:
+  - event: start
+    platform: homeassistant
+  - entity_id: sun.sun
+    platform: state
+    to: above_horizon
+  action:
+  - data:
+      entity_id: input_select.hass_template
+      option: Light-Blue
+    service: input_select.select_option
+- id: alarm_armed_theme
+  alias: alarm_armed_theme_dark
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: armed_home
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: armed_away
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      entity_id: input_select.hass_template
+      option: Dark-Red
+    service: input_select.select_option
+- id: alarm_disarmed_theme
+  alias: alarm_disarmed_theme_day
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: disarmed
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action:
+  - data_template:
+      entity_id: input_select.hass_template
+      option: Light-Blue
+    service: input_select.select_option
+- id: '1564273666286'
+  alias: Maintenance Mode On
+  trigger:
+  - entity_id: input_boolean.maintainance_mode
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      name: Dark-Orange
+    service: frontend.set_theme
+- id: '1564273898029'
+  alias: Maintainance Mode off Day
+  trigger:
+  - entity_id: input_boolean.maintainance_mode
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action:
+  - data:
+      name: Light-Blue
+    service: frontend.set_theme
+- id: '1564274024673'
+  alias: Maintainance Mode off night
+  trigger:
+  - entity_id: input_boolean.maintainance_mode
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      name: Dark-Blue
+    service: frontend.set_theme
+- id: '1564274151610'
+  alias: Dark Mode
+  trigger:
+  - entity_id: input_boolean.dark
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      name: PmxMononight
+    service: frontend.set_theme
+- id: '1564274467410'
+  alias: Dark mode off day
+  trigger:
+  - entity_id: input_boolean.dark
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action:
+  - data:
+      name: Light-Blue
+    service: frontend.set_theme
+- id: '1564274544210'
+  alias: Dark mode off night
+  trigger:
+  - entity_id: automation.dark_mode
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      name: Dark-Blue
+    service: frontend.set_theme
+- alias: Internet Speed Glow Connect Great
+  trigger:
+    platform: template
+    value_template: '{{ states(''sensor.speedtest_download'')|float >= 10 }}'
+  action:
+    service: shell_command.green
+  id: 04ee6ea111ae435a9a46748570845c45
+- alias: Internet Speed Glow Connect Poor
+  trigger:
+    platform: template
+    value_template: '{{ states(''sensor.speedtest_download'')|float < 10 }}'
+  action:
+    service: shell_command.red
+  id: f332d37bd1794fab8e367bd41dec7be7
+- id: '1564287606979'
+  alias: alarm_disarmed_theme_night
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: disarmed
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      name: Dark-Blue
+    service: frontend.set_theme
+- alias: Announce Input Over Google Homes
+  trigger:
+  - platform: state
+    entity_id: input_text.announce_google
+  action:
+  - service: tts.google_say
+    data_template:
+      message: '{{ input_text.announce_google }}'
+      cache: false
+  id: eee628e9df394cc5b4413226ddda0d96
+- id: 4f3a2313bc774a50bdb16da2e2036d86
+  alias: Announce Input Over Alexa
+  trigger:
+  - platform: state
+    entity_id: input_text.announce_alexa
+  action:
+  - service: notify.alexa_media_bedroom
+    data_template:
+      type: tts
+      message: '{{ states.input_text.announce_alexa.state }}'
+- id: '1564463723145'
+  alias: backdoor closed
+  trigger:
+  - entity_id: binary_sensor.back_door_2
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      message: Back Door Closed
+    service: notify.push_bullet
+- id: '1564519093129'
+  alias: back door tampered
+  trigger:
+  - entity_id: binary_sensor.back_door_tamper_sensor
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Back Door Tampered
+    service: notify.push_bullet
+- id: '1564519311505'
+  alias: front door open
+  trigger:
+  - entity_id: binary_sensor.front_door_2
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Front Door Open
+    service: notify.push_bullet
+- id: '1564519388245'
+  alias: front door closed
+  trigger:
+  - entity_id: binary_sensor.front_door_2
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      message: Front Door Closed
+    service: notify.push_bullet
+- id: '1564519468247'
+  alias: front door tampered
+  trigger:
+  - entity_id: binary_sensor.front_door_tamper_sensor_2
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Front Door Tampered
+    service: notify.push_bullet
+- id: '1564667377045'
+  alias: motion detected
+  trigger:
+  - entity_id: binary_sensor.livingroom_motion_3
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      data:
+        type: tts
+      message: motion detected!
+      target:
+      - group.alexa
+      - Guest Room
+      - media_player.bedroom
+      - serialNumber
+    service: notify.alexa_media_bedroom
+- id: '1564843837866'
+  alias: Backdoor Open
+  trigger:
+  - entity_id: binary_sensor.back_door_2
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Back Door Open
+    service: notify.push_bullet
+- id: '1564854090287'
+  alias: All doors and windows
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: arm_home
+  condition:
+  - condition: state
+    entity_id: group.door_windw_sensor_group
+    state: 'on'
+  action:
+  - data:
+      message: A Door or Window Still Open
+    service: notify.push_bullet
+  - data: {}
+    service: alarm_control_panel.alarm_disarm
+- id: '1564960744476'
+  alias: Alexa TTS Bedroom
+  trigger:
+  - entity_id: input_text.announce_alexa
+    platform: state
+  condition:
+  - condition: state
+    entity_id: input_select.alexa_source
+    state: Bedroom
+  action:
+  - data:
+      data:
+        type: tts
+      message: '{{ states.input_text.announce_alexa.state }}'
+    service: notify.alexa_media_bedroom
+- id: '1564962066345'
+  alias: Alexa TTS Livingroom
+  trigger:
+  - entity_id: input_text.announce_alexa
+    platform: state
+  condition:
+  - condition: state
+    entity_id: input_select.alexa_source
+    state: Livingroom
+  action:
+  - data:
+      data:
+        type: tts
+      message: '{{ states.input_text.announce_alexa.state }}'
+    service: notify.alexa_media_livingroom
+- id: '1564962358661'
+  alias: Google Home TTS
+  trigger:
+  - entity_id: input_text.announce_google
+    platform: state
+  condition: []
+  action:
+  - data_template:
+      message: '{{input_text.announce_google}}'
+    service: tts.google_translate_say
+- id: '1565255525908'
+  alias: Dark theme on restart
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      name: Dark-Blue
+    service: frontend.set_theme
+- id: '1565255601794'
+  alias: Light theme on restart
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action:
+  - data:
+      name: Light-Blue
+    service: frontend.set_theme
+- id: '1565402282984'
+  alias: Sash Home
+  trigger:
+  - entity_id: device_tracker.hostname1
+    from: not_home
+    platform: state
+    to: home
+  condition: []
+  action:
+  - data:
+      message: Sashya is Home
+    service: notify.push_bullet
+- id: '1565402435208'
+  alias: Cody Home
+  trigger:
+  - entity_id: device_tracker.life360_deveraux
+    from: away
+    platform: state
+    to: home
+  condition: []
+  action:
+  - data:
+      message: Cody is Home
+    service: notify.push_bullet
+- id: '1565159999620'
+  alias: Codys's Alarm
+  trigger:
+  - entity_id: sensor.a_alarmtrigger
+    from: 'False'
+    platform: state
+    to: 'True'
+  condition:
+  - condition: state
+    entity_id: input_boolean.a_alarm_status
+    state: 'on'
+  action:
+  - data:
+      message: 'Alarm '
+    service: notify.push_bullet
+- id: '1565990873065'
+  alias: Alarm_arm_theme_day
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: armed_home
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: armed_away
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action:
+  - data:
+      entity_id: input_select.hass_template
+      option: Light-LightRed
+    service: input_select.select_option
+- alias: Upstairs Heat On
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_boolean.upstairs_heat
+    to: 'on'
+  action:
+  - service: notify.push
+    data_template:
+      title: Climate Heat
+      message: Heat On
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.dining_room
+      temperature: '{{ float(states.climate.dining_room.attributes.current_temperature)
+        + ((float(states.climate.upstairs_heat.attributes.current_temperature) - float(states.climate.dining_room.attributes.current_temperature))
+        | abs) }}
+
+        '
+  id: 824b65656c2744ce98572ece8b9bc9d6
+- alias: Upstairs Cool On
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_boolean.upstairs_cool
+    to: 'on'
+  action:
+  - service: notify.push
+    data_template:
+      title: Climate Cool
+      message: Cool On
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.dining_room
+      temperature: '{{ float(states.climate.dining_room.attributes.current_temperature)
+        - ((float(states.climate.upstairs_heat.attributes.current_temperature) - float(states.climate.dining_room.attributes.current_temperature))
+        | abs) }}
+
+        '
+  id: a9fe3c9992254cc787f3d44b1c6dc88b
+- alias: Upstairs Heat Off
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_boolean.upstairs_heat
+    to: 'off'
+  action:
+  - service: notify.push
+    data_template:
+      title: Climate Heat
+      message: Heat Off
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.dining_room
+      temperature: '{{ states.input_number.previous_local_temp_heat.state }}'
+  id: b75ac3df24ab44089b7f1f2148181dce
+- alias: Upstairs Cool Off
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_boolean.upstairs_cool
+    to: 'off'
+  action:
+  - service: notify.push
+    data_template:
+      title: Climate Cool
+      message: Cool Off
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.dining_room
+      temperature: '{{ states.input_number.previous_local_temp_cool.state }}'
+  id: 18188be687924e7b9e06c564789264db
+- alias: Upstairs Cool Temperature Control Mode
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_select.temperature_control_mode
+    to: Second Floor
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.dining_room_thermostat_hvac_mode.state == "cool"  }}'
+  action:
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.previous_local_temp_cool
+      value: '{{ states.sensor.dining_room_thermostat_target.state }}'
+  - service: climate.turn_on
+    entity_id: climate.upstairs_cool
+  id: 06b188a7e7d640e8b9afe34dad57007d
+- alias: Upstairs Heat Temperature Control Mode
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_select.temperature_control_mode
+    to: Second Floor
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.dining_room_thermostat_hvac_mode.state == "heat"  }}'
+  action:
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.previous_local_temp_heat
+      value: '{{ states.sensor.dining_room_thermostat_target.state }}'
+  - service: climate.turn_on
+    entity_id: climate.upstairs_heat
+  id: 1d539ebefe59434bbfb667aa5aee489c
+- alias: Local Cool Temperature Control Mode
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_select.temperature_control_mode
+    to: Main Floor
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.dining_room_thermostat_hvac_mode.state == "cool"  }}'
+  action:
+  - service: climate.turn_off
+    entity_id: climate.upstairs_heat
+  - service: climate.turn_off
+    entity_id: climate.upstairs_heat
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.dining_room
+      temperature: '{{ states.input_number.previous_local_temp_cool.state }}'
+  id: 1e3a8af342f24ec4b668ae3bed9f1a74
+- alias: Local Heat Temperature Control Mode
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_select.temperature_control_mode
+    to: Main Floor
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.dining_room_thermostat_hvac_mode.state == "heat"  }}'
+  action:
+  - service: climate.turn_off
+    entity_id: climate.upstairs_heat
+  - service: climate.turn_off
+    entity_id: climate.upstairs_heat
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.dining_room
+      temperature: '{{ states.input_number.previous_local_temp_heat.state }}'
+  id: c7e39034165b4286a1cb2cc350839829
+- id: '1567420400182'
+  alias: livingroom temp sensor
+  trigger:
+  - entity_id: sensor.livingroom_temperature_5
+    platform: state
+  condition: []
+  action:
+  - data:
+      payload_template: '{{ states.sensor.livingroom_temperature_5.state }}'
+      topic: temp/livingroom
+    service: mqtt.publish
+- id: '1567589396091'
+  alias: Plant
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+  - service: python_script.set_state
+    data_template:
+      entity_id: sensor.plants_last_watered
+      state: false
+- id: '1567676477573'
+  alias: Sashya Cooks
+  trigger:
+  - entity_id: input_select.who_cooks
+    platform: state
+    to: Cody
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action: []
+- alias: '[HA] Timer - Load entity ids on boot'
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: python_script.populate_timer_entity_id
+  initial_state: 'on'
+  id: 6943715a806f4d11aa50e9c78deb36c2
+- alias: '[HA] Timer X'
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.timer_0
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.timer_1
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.timer_2
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.timer_3
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.timer_4
+  condition: []
+  action:
+  - service: script.timer_x_execute
+    data_template:
+      timer: '{{trigger.event.data.entity_id}}'
+  id: 88e087df70c349b893234a1afddb1932
+- id: '1567962792515'
+  alias: Garbage Day
+  trigger:
+  - at: 07:00:00
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - tue
+    - fri
+  action:
+  - alias: ''
+    data: {}
+    service: frontend.set_theme
+- id: '1567966748347'
+  alias: alarm_clock
+  trigger:
+  - entity_id: sensor.a_alarmtrigger
+    from: 'False'
+    platform: state
+    to: 'True'
+  condition: []
+  action:
+  - data:
+      entity_id: light.king_deveraux
+    service: light.turn_on

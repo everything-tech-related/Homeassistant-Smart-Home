@@ -1,0 +1,161 @@
+############# SWITCHES ###############
+
+  - platform: template
+    switches:
+      upstairs_heat:
+        value_template: "{{ is_state('switch.upstairs_heat', 'on') }}"
+        turn_on:
+          service: switch.turn_on
+          data:
+            entity_id: switch.upstairs_heat_on
+        turn_off:
+          service: switch.turn_off
+          data:
+            entity_id: switch.upstairs_heat_off
+
+#  - platform: template
+#    switches:
+#      upstairs_cool:
+
+
+  - platform: template
+    switches:
+      alarm_toggle:
+        friendly_name: "Alarm"
+        value_template: "{{ is_state('light.king_deveraux', 'on') }}"
+        turn_on:
+          service: light.toggle
+          data:
+            entity_id: light.king_deveraux
+        turn_off:
+          service: light.toggle
+          data:
+            entity_id: light.king_fdeveraux
+
+##########  BAR LIGHT #############
+  - platform: mqtt
+    name: "Barlight"
+    command_topic: "cmnd/sonoff/power"
+    state_topic: "stat/sonoff/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+############ FISH LIGHT#############
+  - platform: mqtt
+    name: "Fishlight"
+    command_topic: "cmnd/sonofffish/power"
+    state_topic: "stat/sonofffish/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+    
+    
+  - platform: broadlink
+    host: 192.168.1.12
+    mac: 'b4:43:0d:e4:2f:c0'
+    timeout: 60
+    type: rm2_pro_plus
+    switches:
+      bedroom_tv_power:
+        friendly_name: "Bedroom power"
+        command_on: 'JgBgAAABKJQTEhMSEzcTEhQRFBITEhMSEzcTNxMSFDYUNxM3EzcUNhQSExITEhM3ExITEhQRFBITNxM3EzcTEhQ2FDcTNxM3EwAFBwABKEoTAAxGAAEoShMADEYAAShKEwANBQAAAAAAAAAA'
+        command_off: 'JgBgAAABKJQTEhMSEzcTEhQRFBITEhMSEzcTNxMSFDYUNxM3EzcUNhQSExITEhM3ExITEhQRFBITNxM3EzcTEhQ2FDcTNxM3EwAFBwABKEoTAAxGAAEoShMADEYAAShKEwANBQAAAAAAAAAA'
+
+      bedroom_tv_netflix:
+        friendly_name: "Bedroom Netflix"
+        command_on: 'JgBQAAABKZMTEhMTEzcTEhMSExITEhMSEzcUNxMSEzcTNxM3FDcTNxM3EzcUEhM3ExITNxM3FDcTEhMSEzcTEhM3FBEUEhMSEwAFBgABKUkTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKZMTEhMTEzcTEhMSExITEhMSEzcUNxMSEzcTNxM3FDcTNxM3EzcUEhM3ExITNxM3FDcTEhMSEzcTEhM3FBEUEhMSEwAFBgABKUkTAA0FAAAAAAAAAAA='
+          
+          
+      bedroom_tv_left:
+        friendly_name: "Bedroom left"
+        command_on: 'JgBQAAABKJQTExITEjgSExITEhMSExMTEjgSOBITEjgSOBM4EjgSOBI4EzkROBITEhMSExM4EhMSExITEhMSOBI4EzgSExI4EgAFCAABKEoRAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKJQTExITEjgSExITEhMSExMTEjgSOBITEjgSOBM4EjgSOBI4EzkROBITEhMSExM4EhMSExITEhMSOBI4EzgSExI4EgAFCAABKEoRAA0FAAAAAAAAAAA='                     
+
+      bedroom_tv_right:
+        friendly_name: "Bedroom right"
+        command_on: 'JgBQAAABKJQTEhMSEzcUERQSExITEhMSEzcTNxQRFDcTNxM3EzcUNxMSExITEhM3ExIUERQ3ExITNxM3EzcUEhM3EzcTEhM3EwAFBwABKUkTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKJQTEhMSEzcUERQSExITEhMSEzcTNxQRFDcTNxM3EzcUNxMSExITEhM3ExIUERQ3ExITNxM3EzcUEhM3EzcTEhM3EwAFBwABKUkTAA0FAAAAAAAAAAA='
+
+      bedroom_tv_up:
+        friendly_name: "Bedroom up"
+        command_on: 'JgBQAAABKZMUEhMSEzcTEhMSExIUERQRFDcTNxMSEzcUNhQ3EzcTNxQ2FBEUNxMSExITEhM3FBEUEhM3ExITNxM3FDYUEhM3EwAFBwABKEoTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKZMUEhMSEzcTEhMSExIUERQRFDcTNxMSEzcUNhQ3EzcTNxQ2FBEUNxMSExITEhM3FBEUEhM3ExITNxM3FDYUEhM3EwAFBwABKEoTAA0FAAAAAAAAAAA='
+
+      bedroom_tv_down:
+        friendly_name: "Bedroom down"
+        command_on: 'JgBYAAABKZMUERQRFDcTEhMSExITEhQRFDYUNxMSEzcTNxQ2FDcTNxMSFDYUNhQSExITEhM3FBEUNhQSExITNxM3FDYUERQ2FAAFBgABKUkUAAxFAAEpSRQADQU='
+        command_off: 'JgBYAAABKZMUERQRFDcTEhMSExITEhQRFDYUNxMSEzcTNxQ2FDcTNxMSFDYUNhQSExITEhM3FBEUNhQSExITNxM3FDYUERQ2FAAFBgABKUkUAAxFAAEpSRQADQU='
+
+      bedroom_tv_ok:
+        friendly_name: "Bedroom ok"
+        command_on: 'JgBQAAABKJQTEhMSEzcTEhMSFBITEhMSEzcTNxMSFDcTNxM3EzcTNxQSExITNxMSExITEhM3FBITNxM3ExITNxQ3EzcTEhM3EwAFBwABKEoTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKJQTEhMSEzcTEhMSFBITEhMSEzcTNxMSFDcTNxM3EzcTNxQSExITNxMSExITEhM3FBITNxM3ExITNxQ3EzcTEhM3EwAFBwABKEoTAA0FAAAAAAAAAAA='
+
+      bedroom_tv_back:
+        friendly_name: "Bedroom back"
+        command_on: 'JgBQAAABKZMTExMSEzcTEhMSExITEhMTEzcTNxMSEzcTNxQ3EzcTNxMSEzgTEhM3ExITEhM3ExMTNxMSEzcTEhM3FDcTEhM4EgAFBwABKEkUAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKZMTExMSEzcTEhMSExITEhMTEzcTNxMSEzcTNxQ3EzcTNxMSEzgTEhM3ExITEhM3ExMTNxMSEzcTEhM3FDcTEhM4EgAFBwABKEkUAA0FAAAAAAAAAAA='
+
+
+      bedroom_tv_exit:
+        friendly_name: "Bedroom exit"
+        command_on: 'JgBQAAABKZMUERQRFDcTEhMSExITEhMSFDYUNxMSEzcTNxQ3EzcTNxM3FBEUERQ3ExITEhM3ExIUERQ3EzcTEhM3FDYUEhM3EwAFBwABKEkUAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKZMUERQRFDcTEhMSExITEhMSFDYUNxMSEzcTNxQ3EzcTNxM3FBEUERQ3ExITEhM3ExIUERQ3EzcTEhM3FDYUEhM3EwAFBwABKEkUAA0FAAAAAAAAAAA='
+
+      bedroom_tv_menu:
+        friendly_name: "Bedroom menu"
+        command_on: 'JgBQAAABKJQTEhMSEzcUEhMSExITEhMSEzcTNxQSEzcTNxM3EzcUNxM3ExITNxM3FBITNxMSExITEhM3FBEUEhM3ExITNxM3EwAFBwABKUkTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKJQTEhMSEzcUEhMSExITEhMSEzcTNxQSEzcTNxM3EzcUNxM3ExITNxM3FBITNxMSExITEhM3FBEUEhM3ExITNxM3EwAFBwABKUkTAA0FAAAAAAAAAAA='
+
+
+      bedroom_tv_vol_up:
+        friendly_name: "Bedroom vol+"
+        command_on: 'JgBQAAABKZMUERQSEzcTEhMSExITEhMSFDcTNxMSEzcTNxQ3EzcTNxMSFDYUEhMSExITEhMSExIUNhQSEzcTNxM3FDYUNxM3EwAFBwABKUkTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKZMUERQSEzcTEhMSExITEhMSFDcTNxMSEzcTNxQ3EzcTNxMSFDYUEhMSExITEhMSExIUNhQSEzcTNxM3FDYUNxM3EwAFBwABKUkTAA0FAAAAAAAAAAA='
+
+
+      bedroom_tv_vol_down:
+        friendly_name: "Bedroom vol-"
+        command_on: 'JgBgAAABK5MUEhMSEzcTEhMSExITEhQRFDcTNxMSEzcTNxQ3EzcTNxM3FDcTEhMSExITEhMSExIUERQSEzcTNxM3EzcUNxM3EwAFBwABKEoTAAxGAAEoShMADEYAASlJEwANBQAAAAAAAAAA'
+        command_off: 'JgBgAAABK5MUEhMSEzcTEhMSExITEhQRFDcTNxMSEzcTNxQ3EzcTNxM3FDcTEhMSExITEhMSExIUERQSEzcTNxM3EzcUNxM3EwAFBwABKEoTAAxGAAEoShMADEYAASlJEwANBQAAAAAAAAAA'
+
+      bedroom_tv_play:
+        friendly_name: "Bedroom play"
+        command_on: 'JgBYAAABKJQTEhMSEzcTEhQRFBITEhMSEzcTNxQRFDcTNxM3EzcUNhQ3EzcTEhMSFDYUNxMSExITEhMSEzcUNxMSExITNxM3FAAFBgABKUkTAAxGAAEoShMADQU='
+        command_off: 'JgBYAAABKJQTEhMSEzcTEhQRFBITEhMSEzcTNxQRFDcTNxM3EzcUNhQ3EzcTEhMSFDYUNxMSExITEhMSEzcUNxMSExITNxM3FAAFBgABKUkTAAxGAAEoShMADQU='
+
+
+      bedroom_tv_pause:
+        friendly_name: "Bedroom pause"
+        command_on: 'JgBQAAABKZMTEhMSEzcUEhMSExITEhMSEzcTNxQSEzcTNxM3FDYUNxM3EzcTNxQSEzcTNxMSExITEhQRFBITNxMSExITNxM3FAAFBgABKUkTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKZMTEhMSEzcUEhMSExITEhMSEzcTNxQSEzcTNxM3FDYUNxM3EzcTNxQSEzcTNxMSExITEhQRFBITNxMSExITNxM3FAAFBgABKUkTAA0FAAAAAAAAAAA='
+
+      bedroom_tv_mute:
+        friendly_name: "Bedroom mute"
+        command_on: 'JgBQAAABKZMUEhMSEzcTEhMSExIUERQRFDcTNxMSEzcUNhQ3EzcTNxQ2FBITEhM3ExITEhQRFBITEhM3EzcTEhQ2FDcTNxM3EwAFBwABKUkTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKZMUEhMSEzcTEhMSExIUERQRFDcTNxMSEzcUNhQ3EzcTNxQ2FBITEhM3ExITEhQRFBITEhM3EzcTEhQ2FDcTNxM3EwAFBwABKUkTAA0FAAAAAAAAAAA='
+
+
+
+############RM PRO######
+#  - platform: broadlink
+#    host: 192.168.1.11
+#    mac: ***
+#    type: rm2_pro_plus
+    
+###########RM MINI#########
+#  - platform: broadlink
+#    host: 192.168.1.28
+#    mac: ***
+#    type: rm2_pro_plus
+#    switches:
+#      bedroom_tv:
+#        friendly_name: "Bedroom TV"
+#        command_on: 'JgBgAAABKJQTEhMSEzcTEhQRFBITEhMSEzcTNxMSFDYUNxM3EzcUNhQSExITEhM3ExITEhQRFBITNxM3EzcTEhQ2FDcTNxM3EwAFBwABKEoTAAxGAAEoShMADEYAAShKEwANBQAAAAAAAAAA'
+#        command_off: 'JgBgAAABKJQTEhMSEzcTEhQRFBITEhMSEzcTNxMSFDYUNxM3EzcUNhQSExITEhM3ExITEhQRFBITNxM3EzcTEhQ2FDcTNxM3EwAFBwABKEoTAAxGAAEoShMADEYAAShKEwANBQAAAAAAAAAA'
+###########RM MINI#########
+  

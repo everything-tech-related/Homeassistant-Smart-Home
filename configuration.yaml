@@ -1,0 +1,243 @@
+homeassistant:
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: imperial
+  customize: !include customize.yaml
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:       
+hassio:
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  #base_url: https://****
+  #ssl_certificate: /ssl/fullchain.pem
+  #ssl_key: /ssl/privkey.pem
+map:  
+mobile_app:
+python_script:
+#apps:
+#config_check:
+# Example configuration.yaml entry
+shopping_list:
+
+camera: !include camera.yaml
+
+spotcast:
+  username: !secret spotify_user
+  password: !secret spotify_password
+
+octoprint:
+  - host: ***
+    api_key: secret! octoprint_api
+    name: BigDog
+    number_of_tools: 2
+    sensors:
+      monitored_conditions:
+        - 'Current State'
+        - 'Job Percentage'
+        - 'Temperatures'
+        - 'Time Elapsed'
+        - 'Time Remaining'
+
+# Example configuration.yaml entry
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+media_player: !include media_player.yaml
+
+
+discovery:
+
+notify:
+  - platform: alexa_media
+    name: alexa_media
+    
+  - platform: pushbullet
+    api_key: !secret push_bullet
+    name: Push Bullet
+
+
+sun:
+
+openuv:
+  api_key: !secret openuv
+
+climate:
+  - platform: mqtt
+    retain: true
+    name: ""
+    modes:
+      - "auto"
+      - "off"
+      - "cool"
+      - "heat"
+      - "fan_only"
+    fan_modes:
+      - "auto"
+      - "high"
+      - "medium"
+      - "low"
+    power_command_topic: "nest/ac/power/set"
+    mode_command_topic: "nest/ac/mode/set"
+    temperature_command_topic: "nest/ac/temperature/set"
+    fan_mode_command_topic: "nest/ac/fan/set"
+    current_temperature_topic: "temp/livingroom"
+    min_temp: 50
+    max_temp: 80
+    precision: 1.0 
+    initial: 75
+# Text to speech
+tts:
+  - platform: google_translate
+
+#android_ip_webcam:
+#- host: ***
+
+# ALARM
+alarm_control_panel:
+  - platform: manual_mqtt
+    state_topic: home/alarm
+    command_topic: home/alarm/set
+    code: !secret alarm_code
+    trigger_time: 300
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      delay_time: 0
+      pending_time: 0
+    armed_away:
+      delay_time: 60
+      pending_time: 30
+    triggered:
+      pending_time: 0
+      
+google:
+  client_id: !secret google_client
+  client_secret: !secret google_key 
+    
+
+
+conversation:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+switch: !include switch.yaml
+#switches: !include switches.yaml
+sensor: !include sensor.yaml
+scene: !include scenes.yaml
+cover: !include cover.yaml
+#alert: !include alert.yaml
+binary_sensor: !include binary_sensor.yaml
+recorder: !include recorder.yaml
+history: !include history.yaml
+#logbook:
+input_select: !include input_select.yaml
+input_boolean: !include input_boolean.yaml
+input_number: !include input_number.yaml
+input_text: !include input_text.yaml
+#intent_script: !include intent_script.yaml
+frontend: !include frontend.yaml
+#themes: !include themes.yaml
+#resources: !include rescources.yaml
+timer: !include timer.yaml
+
+mqtt:
+  broker: *******-mqtt
+  username: !secret default_username
+  password: !secret default_password_2
+  discovery: true
+#  client_id: home-assistant
+  
+# Example configuration.yaml entry
+logger:
+  default: info
+  logs:
+    homeassistant.components.yamaha: critical
+    custom_components.my_integration: critical
+
+influxdb:
+  host: ****-influxdb
+  port: ****
+  database: homeassistant
+  username: homeassistant
+  password: <****>
+  max_retries: 3
+  default_measurement: state
+
+hacs:
+  token: !secret hacs_token
+  appdaemon: true
+  theme: true
+  python_script: true
+  
+#breaking_changes:
+    
+panel_iframe:
+
+  tasaodmin:
+    title: 'Tasmota Configs'
+    icon: 'mdi:robot'
+    url: 'https://******
+    
+  grafana:
+    title: 'Grafana'
+    icon: 'mdi:eye-circle'
+    url: 'https://****
+  
+  
+  ide:
+    title: 'IDE'
+    icon: 'mdi:file-cloud'
+    url: 'https://****
+          
+alexa_media:
+  accounts:
+    - email: !secret default_email
+      password: !secret amazon_password
+      url: amazon.com
+      scan_interval: 1
+      
+life360:
+  accounts:
+    username: !secret default_email
+    password: !secret default_password
+# Other life360 configuration variables...
+zone:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  radius: 200
+  icon: mdi:home
+
+device_tracker:
+ - platform: iphonedetect
+   consider_home: 60
+   hosts:
+     hostname1: ****
+     
+# - platform: nmap_tracker
+#   hosts: ****
+
+# Example configuration.yaml entry
+weather:
+  - platform: darksky
+    api_key: !secret darksky
+    units: auto
+    latitude: !secret latitude
+    longitude: !secret longitude
+     
+       
+#grocy:
+#  url: http://***
+#  api_key: secret! grocy_api
+#  sensor:
+#   - enabled: true
+calendar:
+  - platform: todoist
+    token: !secret todoist

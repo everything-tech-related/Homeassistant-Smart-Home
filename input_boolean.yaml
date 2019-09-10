@@ -1,0 +1,17 @@
+maintainance_mode:
+    name: Maintainance Mode
+    
+dark:
+  name: Dark Mode
+  
+upstairs_heat:
+  name: Upstairs Heater State  
+  initial: off
+
+upstairs_cool:
+  name: Upstairs Air Conditioner State  
+  initial: off
+  
+a_alarm_status:
+  name: Alarm Status
+  initial: off
