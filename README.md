@@ -1,3 +1,3 @@
-# my home assistant Smart Home Dashboard
+# My home assistant Smart Home Dashboard
 Still a work in progress
-![Alt text](homeassistant/main.png?raw=true "Screenshot")
+![Alt text](everything-tech-related/homeassistant/main.png?raw=true)
