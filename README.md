@@ -4,4 +4,4 @@ Still a work in progress
 ![Video](/video.mp4?raw=true)
 
 # New DashBoard...Code coming soon...
-![Screenshot](/kiosk.png?raw=true)
+![Screenshot](/kiosk.jpg?raw=true)
